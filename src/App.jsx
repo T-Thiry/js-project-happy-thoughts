@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import MessageForm from './components/MessageForm';
 import MessageList from './components//MessageList';
+import SignupForm from './components/SignupForm';
 import sharingImage from './assets/images/Sharing_thoughts.png';
 import './App.css';
 
@@ -46,6 +47,7 @@ const App = () => {
 
   return (
     <>
+    <SignupForm />
       <div className="header">
         <h1>Happy Thoughts</h1>
         <img src={sharingImage} alt="Sharing thoughts" />
