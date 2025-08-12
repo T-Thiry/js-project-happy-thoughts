@@ -24,7 +24,7 @@ const MessageForm = ({ onAddMessage, disabled, user }) => {
         'Content-Type': 'application/json',
         'Authorization': `${token}`
        },
-      body: JSON.stringify({ message: message.trim() })
+      body: JSON.stringify({ user, message: message.trim() })
     })
       .then(res => res.json())
       .then(data => {
