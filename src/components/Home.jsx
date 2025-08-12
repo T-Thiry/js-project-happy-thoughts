@@ -8,9 +8,6 @@ const Home = ({ messages, loading, onLike, onAddMessage }) => {
   const token = localStorage.getItem('accessToken'); 
   const isDisabled = !token;
 
-  // Corrected: Use localStorage.getItem instead of JSON.getItem
-  const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
-
   return (
     <> 
       <div className="header">
@@ -23,7 +20,7 @@ const Home = ({ messages, loading, onLike, onAddMessage }) => {
           <MessageForm 
           onAddMessage={onAddMessage} 
           disabled={isDisabled}
-          user={user}/>
+          />
         </div>
         {isDisabled && (
           <p style={{ color: "red" }}>

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const MessageForm = ({ onAddMessage, disabled, user }) => {
+const MessageForm = ({ onAddMessage, disabled }) => {
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
 
@@ -24,7 +24,7 @@ const MessageForm = ({ onAddMessage, disabled, user }) => {
         'Content-Type': 'application/json',
         'Authorization': `${token}`
        },
-      body: JSON.stringify({ user, message: message.trim() })
+      body: JSON.stringify({ message: message.trim() })
     })
       .then(res => res.json())
       .then(data => {

@@ -25,7 +25,6 @@ fetch('https://happy-thoughts-api-svd7.onrender.com/users/login', {
   })
   .then(data => {
     localStorage.setItem('accessToken', data.accessToken);
-    localStorage.setItem('user', JSON.stringify(data.user));
     onSuccess();
   })
   .catch(() => {
