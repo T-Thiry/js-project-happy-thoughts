@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const MessageForm = ({ onAddMessage, disabled }) => {
+const MessageForm = ({ onAddMessage, disabled, user }) => {
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
 
