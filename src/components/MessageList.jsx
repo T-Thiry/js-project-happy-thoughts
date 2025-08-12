@@ -4,7 +4,7 @@ const MessageList = ({ messages, onLike }) => {
   return (
     <div className="message-list">
       {messages.map((message) => (
-        <MessageCard key={message.id} message={message} onLike={onLike} />
+        <MessageCard key={message._id} message={message} onLike={onLike} />
       ))}
     </div>
   );

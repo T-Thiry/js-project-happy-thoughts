@@ -1,20 +1,24 @@
 import { useState, useEffect } from 'react';
-import MessageForm from './components/MessageForm';
-import MessageList from './components//MessageList';
-import SignupForm from './components/SignupForm';
-import sharingImage from './assets/images/Sharing_thoughts.png';
+import Home from './components/Home'
+import Signup from './components/Signup'
+import Login from './components/Login'
 import './App.css';
 
 const App = () => {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [page, setPage] = useState('home');
+  const token = localStorage.getItem('accessToken');
+  const [isLoggedIn, setIsLoggedIn] = useState(!!token);
+
 
   const fetchThoughts = () => {
     setLoading(true);
-    fetch('https://happy-thoughts-api-4ful.onrender.com/thoughts')
+    fetch('https://happy-thoughts-api-svd7.onrender.com/thoughts')
+    // ')
       .then(res => res.json())
       .then(data => {
-        setMessages(data.slice(0, 5));
+        setMessages(data.response.slice(0, 5));
         setLoading(false);
       })
       .catch(err => {
@@ -32,8 +36,15 @@ const App = () => {
   };
 
   const handleLike = (id) => {
-    fetch(`https://happy-thoughts-api-4ful.onrender.com/thoughts/${id}/like`, {
-      method: 'POST'
+    const token = localStorage.getItem('accessToken');
+    
+   
+    fetch(`https://happy-thoughts-api-svd7.onrender.com/thoughts/${id}/like`, {
+      method: 'PATCH',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
     })
       .then(res => res.json())
       .then(() => {
@@ -44,26 +55,39 @@ const App = () => {
       .catch(err => console.error(err));
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('accessToken');
+    setIsLoggedIn(false);
+    setPage('login');
+  }
+
+  const handleLoginSuccess = () => {
+  setIsLoggedIn(true);
+  setPage('home');
+  fetchThoughts();
+  }
 
   return (
     <>
-    <SignupForm />
-      <div className="header">
-        <h1>Happy Thoughts</h1>
-        <img src={sharingImage} alt="Sharing thoughts" />
-      </div>
-      <div className="outer-wrapper">
-        <div className="app-container">
-          <p>What makes you happy right now?</p>
-          <MessageForm onAddMessage={addMessage} />
-        </div>
-        <div className="message-container">
-          {loading ? <p>Loading thoughts...</p> : <MessageList messages={messages} onLike={handleLike} />}
-        </div>
-      </div>
+      <nav>
+        <button onClick={() => setPage('home')} disabled={!isLoggedIn}>Home</button>
+        {!isLoggedIn && <button onClick={() => setPage('signup')}>Sign Up</button>}
+        {!isLoggedIn && <button onClick={() => setPage('login')}>Login</button>}
+        {isLoggedIn && <button onClick={handleLogout}>Logout</button>}
+      </nav>
+
+      {page === 'signup' && <Signup onSuccess={handleLoginSuccess} />}
+      {page === 'login' && <Login onSuccess={handleLoginSuccess} />}
+      {page === 'home' && (
+          <Home
+          messages={messages}
+          loading={loading}
+          onLike={handleLike}
+          onAddMessage={addMessage}
+          />
+      )}
     </>
   );
 };
-
 
 export default App;
