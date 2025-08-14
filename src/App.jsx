@@ -55,6 +55,32 @@ const App = () => {
       .catch(err => console.error(err));
   };
 
+  // Add handleEdit function here
+  const handleEdit = (id, updatedMessage) => {
+    const token = localStorage.getItem('accessToken');
+
+    fetch(`https://happy-thoughts-api-svd7.onrender.com/thoughts/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `${token}`,
+      },
+      body: JSON.stringify({ message: updatedMessage.trim() }),
+  })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          setMessages((prev) =>
+            prev.map((message) =>
+              message._id === id ? { ...message, message: updatedMessage } : message
+            )
+          );
+        } else {
+          console.error('Failed to edit thought:', data.message);
+        }
+      })
+      .catch(() => console.error('Network error while editing thought'));
+    }
   // Add handleDelete function here
   const handleDelete = (id) => {
     const token = localStorage.getItem('accessToken');
@@ -106,11 +132,13 @@ const App = () => {
           loading={loading}
           onLike={handleLike}
           onAddMessage={addMessage}
+          onEdit={handleEdit} // Pass handleEdit to Home
           onDelete={handleDelete} // Pass handleDelete to Home
           />
       )}
     </>
   );
 };
+
 
 export default App;

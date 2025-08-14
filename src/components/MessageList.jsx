@@ -1,10 +1,10 @@
 import MessageCard from './MessageCard';
 
-const MessageList = ({ messages, onLike, onDelete }) => {
+const MessageList = ({ messages, onLike, onEdit, onDelete }) => {
   return (
     <div className="message-list">
       {messages.map((message) => (
-        <MessageCard key={message._id} message={message} onLike={onLike} onDelete={onDelete}/>
+        <MessageCard key={message._id} message={message} onLike={onLike} onEdit={onEdit} onDelete={onDelete}/>
       ))}
     </div>
   );
