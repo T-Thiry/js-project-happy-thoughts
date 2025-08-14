@@ -31,7 +31,7 @@ const Home = ({ messages, loading, onLike, onAddMessage, onEdit, onDelete }) => 
           {loading ? 
           (<p>Loading thoughts...</p>     
           ) : (  
-            <MessageList messages={messages} onLike={onLike} onEdit={onEdit} onDelete={onDelete} />
+            <MessageList messages={messages} onLike={onLike} onEdit={onEdit} onDelete={onDelete} disabled={isDisabled} />
           )}
         </div>  
       </div>

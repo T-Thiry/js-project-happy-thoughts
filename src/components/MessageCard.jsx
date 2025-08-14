@@ -16,11 +16,15 @@ function timeAgo(dateString) {
   return 'Just now';
 }
 
-const MessageCard = ({ message, onLike, onEdit, onDelete }) => {
+const MessageCard = ({ message, onLike, onEdit, onDelete, disabled }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [updatedMessage, setUpdatedMessage] = useState(message.message);
 
   const handleEditClick = () => {
+    if (disabled) {
+      alert('You must be logged in to edit a message.');
+      return;
+    }
     setIsEditing(true); // Enable editing mode
   };
 
@@ -62,13 +66,25 @@ const MessageCard = ({ message, onLike, onEdit, onDelete }) => {
         )}
       <button
           className="delete-button"
-          onClick={() => onDelete(message._id)} // Call the onDelete function
+          onClick={() => {
+            if (disabled) {
+              alert('You must be logged in to delete a message.');
+              return;
+            }
+            onDelete(message._id)} // Call the onDelete function
+          }
         >
           🗑️ 
         </button>
         </div>
         <div className="message-actions">
-        <button className={`like-button ${message.hearts > 0 ? 'liked' : ''}`}onClick={() => onLike(message._id)}>❤️</button>
+        <button className={`like-button ${message.hearts > 0 ? 'liked' : ''}`}onClick={() => {
+          if (disabled) {
+            alert('You must be logged in to like a message.');
+            return;
+        }
+          onLike(message._id);
+        }}>❤️</button>
         <span className="like-count">x {message.hearts}</span>
         <small className="time-ago">{timeAgo(message.createdAt)}</small>
       </div>
