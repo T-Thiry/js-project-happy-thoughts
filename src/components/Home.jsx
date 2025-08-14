@@ -23,7 +23,7 @@ const Home = ({ messages, loading, onLike, onAddMessage, onEdit, onDelete }) => 
           />
         </div>
         {isDisabled && (
-          <p style={{ color: "red" }}>
+          <p className="error-text">
           You need to be logged in to share your thoughts.
           </p>
         )}
