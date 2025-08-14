@@ -16,10 +16,18 @@ function timeAgo(dateString) {
   return 'Just now';
 }
 
-const MessageCard = ({ message, onLike }) => {
+const MessageCard = ({ message, onLike, onDelete }) => {
   return (
     <div className="message-card">
+      <div className='delete-message'>
       <p>{message.message}</p>
+      <button
+          className="delete-button"
+          onClick={() => onDelete(message._id)} // Call the onDelete function
+        >
+          🗑️ Delete
+        </button>
+        </div>
       <div className="message-actions">
         <button className={`like-button ${message.hearts > 0 ? 'liked' : ''}`}onClick={() => onLike(message._id)}>❤️</button>
         <span className="like-count">x {message.hearts}</span>

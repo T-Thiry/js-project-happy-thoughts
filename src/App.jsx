@@ -55,6 +55,28 @@ const App = () => {
       .catch(err => console.error(err));
   };
 
+  // Add handleDelete function here
+  const handleDelete = (id) => {
+    const token = localStorage.getItem('accessToken');
+
+    fetch(`https://happy-thoughts-api-svd7.onrender.com/thoughts/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `${token}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          setMessages((prev) => prev.filter((message) => message._id !== id));
+        } else {
+          console.error('Failed to delete thought:', data.message);
+        }
+      })
+      .catch(() => console.error('Network error while deleting thought'));
+  };
+
   const handleLogout = () => {
     localStorage.removeItem('accessToken');
     setIsLoggedIn(false);
@@ -84,6 +106,7 @@ const App = () => {
           loading={loading}
           onLike={handleLike}
           onAddMessage={addMessage}
+          onDelete={handleDelete} // Pass handleDelete to Home
           />
       )}
     </>

@@ -4,7 +4,7 @@ import MessageForm from "./MessageForm";
 import MessageList from "./MessageList";
 
 
-const Home = ({ messages, loading, onLike, onAddMessage }) => {
+const Home = ({ messages, loading, onLike, onAddMessage, onDelete }) => {
   const token = localStorage.getItem('accessToken'); 
   const isDisabled = !token;
 
@@ -31,7 +31,7 @@ const Home = ({ messages, loading, onLike, onAddMessage }) => {
           {loading ? 
           (<p>Loading thoughts...</p>     
           ) : (  
-            <MessageList messages={messages} onLike={onLike} />
+            <MessageList messages={messages} onLike={onLike} onDelete={onDelete} />
           )}
         </div>  
       </div>

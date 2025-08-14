@@ -110,6 +110,17 @@ h1 {
   margin-top: 1rem;
 }
 
+.delete-message {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.delete-message button {
+  background: none;
+  border: none;
+}
+
 .like-button {
   background-color: rgb(233, 233, 233);
   border: 1px solid rgb(233, 233, 233);
