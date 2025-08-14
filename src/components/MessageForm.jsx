@@ -53,7 +53,7 @@ const MessageForm = ({ onAddMessage, disabled }) => {
         disabled={disabled}
       />
       {error && <p style={{ color: 'red' }}>{error}</p>}
-      <button type="submit" className='submit-button' disabled={disabled || !message.trim()}>Send Message ❤️</button>
+      <button type="submit" className='button submit-button' disabled={disabled || !message.trim()}>Send Message ❤️</button>
     </form>
   );
 };

@@ -44,8 +44,8 @@ const MessageCard = ({ message, onLike, onEdit, onDelete }) => {
             className="edit-textarea"
           />
            <div className="edit-buttons">
-            <button onClick={handleSaveClick} className="save-button">Save</button>
-            <button onClick={handleCancelClick} className="cancel-button">Cancel</button>
+            <button onClick={handleSaveClick} className="button save-button">Save</button>
+            <button onClick={handleCancelClick} className="button cancel-button">Cancel</button>
           </div>
         </div>
       ) : (
