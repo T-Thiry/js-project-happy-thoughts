@@ -92,7 +92,7 @@ const App = () => {
   return (
     <>
       <nav>
-        <button onClick={() => setPage('home')} disabled={!isLoggedIn}>Home</button>
+        <button onClick={() => setPage('home')}>Home</button>
         {!isLoggedIn && <button onClick={() => setPage('signup')}>Sign Up</button>}
         {!isLoggedIn && <button onClick={() => setPage('login')}>Login</button>}
         {isLoggedIn && <button onClick={handleLogout}>Logout</button>}
