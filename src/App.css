@@ -5,7 +5,7 @@
   --secondary-bg: #F0F0F0;
   --disabled-bg: #D3D3D3;
   --disabled-text: #A9A9A9;
-  --error-color: #D32F2F;
+  --error-color: #c82020;
   --placeholder-color: #767676;
   --border-color: #CCCCCC;
 }
@@ -192,6 +192,13 @@ form {
   color: var(--text-color);
   cursor: pointer;
   transition: background 0.3s ease;
+}
+
+/* Error Text */
+.error-text {
+  color: var(--error-color);
+  font-size: 0.9rem; /* Optional: Adjust font size */
+  margin-top: 0.5rem; /* Optional: Add spacing */
 }
 
 /* Edit/Delete Buttons */
